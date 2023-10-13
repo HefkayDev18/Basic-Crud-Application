@@ -1,0 +1,6 @@
+/appsettings.json
+/Properties
+/.vs
+/bin/Debug/net7.0
+/obj
+Program.cs
