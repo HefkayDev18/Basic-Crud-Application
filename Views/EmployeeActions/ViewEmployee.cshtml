@@ -1,0 +1,57 @@
+﻿@model List<CrudApplication.Models.DisplayEmployeeViewModel>
+@{
+    ViewData["Title"] = "View Employees";
+}
+
+
+<br />
+<h2 class="text-info">View Employees</h2>
+
+
+<div class="container mt-4">
+   @if(Model != null) { 
+   <table class="table table-striped table-hover border w-10">
+        <thead style="text-align: center;">
+            <tr>
+              @*<th>Id</th>*@
+                <th>Fullname</th>
+                <th>Email</th>
+                <th class="text-uppercase">Department</th>
+                <th>Gender</th>
+                <th>Work Status</th>
+                <th>Staff Id</th>
+                <th>Phone Number</th>
+                <th>Category</th>
+                <th>Date Created</th>
+                <th>Actions</th>
+                @*<th>@Html.DisplayNameFor(model => model.FullName)</th>*@
+            </tr>
+        </thead>
+        <tbody style="text-align: center;">
+            @foreach(var employeeInfo in Model)
+            {
+                <tr>
+                   @*<td>@employeeInfo.Id</td>*@
+                    <td>@employeeInfo.FullName</td>
+                    <td>@employeeInfo.Email</td>
+                    <td class="text-uppercase">@employeeInfo.Department</td>
+                    <td>@employeeInfo.Gender</td>
+                    <td>@employeeInfo.WorkStatus</td>
+                    <td>@employeeInfo.StaffId</td>
+                    <td>@employeeInfo.PhoneNumber</td>
+                    <td>@(employeeInfo.CategoryName != null ? employeeInfo.CategoryName : "No Category")</td>
+                    <td>@employeeInfo.EmployeeDateCreated</td>
+                    <td>
+                        <a class="btn btn-primary" asp-route-id="@employeeInfo.Id" asp-controller="EmployeeActions" asp-action="UpdateEmployee">Update</a>
+                        <a asp-controller="EmployeeActions" asp-action="RemoveEmployee">Click To Delete</a>
+                    </td>
+                   @*<td>@Html.DisplayFor(modelItem => employeeInfo.Email)</td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+   }
+   else {
+      <h3 style="text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%);" class="text-primary">No employee record currently available!</h3>
+   }
+</div>

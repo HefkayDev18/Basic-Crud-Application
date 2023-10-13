@@ -1,0 +1,99 @@
+﻿@model CrudApplication.Models.UpdateEmployeeViewModel
+@{
+    ViewData["Title"] = "Update Employee";
+}
+
+<br />
+<h2 class="text-info">Update Employee</h2>
+
+
+<div class="border container mt-4 px-4 py-4">
+    @if(!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <span class="alert text-danger">@ViewBag.Error</span>
+    }
+     <form method="post" asp-action="UpdateEmployee" asp-controller="EmployeeActions" role="form">
+         @Html.AntiForgeryToken()     
+
+     <input type ="hidden" asp-for="Id" />
+     <input type="hidden" asp-for="CategoryName" />
+
+     <div class="col-12">
+
+     <div class="row"> 
+       <div class="mb-3 col-6">
+          <label asp-for="FullName" class="form-label">Full Name</label>
+          <input type="text" class="form-control" asp-for="FullName" placeholder="Enter Full Name..." required/>
+          <span asp-validation-for="FullName" class="text-danger"></span>
+       </div>
+       <div class="mb-3 col-6">
+          <label asp-for="Email" class="form-label">Email Address</label>
+          <input type="email" class="form-control" asp-for="Email" placeholder="Enter Email..." required/>
+          <span asp-validation-for="Email" class="text-danger"></span>
+       </div>
+     </div> 
+
+     <div class="row">
+       <div class="mb-3 col-6">
+          <label asp-for="Department" class="form-label">Department</label>
+          <input type="text" class="form-control text-uppercase" asp-for="Department" placeholder="Enter Department..." required/>
+          <span asp-validation-for="Department" class="text-danger"></span>
+       </div>
+       <div class="mb-3 col-6">
+          <label asp-for="Gender" class="form-label">Gender</label>
+           <select class="form-select" asp-for="Gender" required>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+          </select>
+          <span asp-validation-for="Gender" class="text-danger"></span>
+       </div>      
+     </div>
+
+     <div class="row">
+       <div class="mb-3 col-6">
+          <label asp-for="WorkStatus" class="form-label">Work Status</label>
+           <select class="form-select" asp-for="WorkStatus" required>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="Remote">Remote</option>
+          </select>
+          <span asp-validation-for="WorkStatus" class="text-danger"></span>
+       </div>
+       <div class="mb-3 col-6">
+          <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+          <input type="tel" class="form-control" asp-for="PhoneNumber" placeholder="Enter Phone Number..." required/>
+          <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+       </div>
+     </div>
+
+     <div class="row">
+        <div class="mb-3 col-6">
+          <label asp-for="StaffId" class="form-label">Staff Id</label>
+          <input type="text" class="form-control" asp-for="StaffId" readonly/>
+       </div>
+       <div class="mb-3 col-6">
+           <label class="form-label" asp-for="CategoryTableId">Staff Category</label>
+           <select class="form-select" asp-for="CategoryTableId" 
+                asp-items="@(new SelectList(ViewBag.ListOfCategory, "CategoryTableId", "CategoryName"))">
+           </select>
+         @*  <span class="text-danger" asp-validation-for=CategoryTableId> </span>*@
+       </div>    
+     </div>    
+     
+     </div>
+
+             
+        <span>
+          <button type="submit" class="btn btn-primary">Update</button>
+          <button type="submit" class="btn btn-danger" asp-controller="EmployeeActions" asp-action="RemoveEmployee">Delete</button>
+        </span>
+       
+     </form>  
+</div>
+
+
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+      
