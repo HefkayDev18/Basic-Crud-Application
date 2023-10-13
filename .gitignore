@@ -1,4 +1,7 @@
 /appsettings.json
+/appsettings.Development.json
+/CrudApplication.csproj
+/CrudApplication.csproj.user
 /Properties
 /.vs
 /bin/Debug/net7.0
